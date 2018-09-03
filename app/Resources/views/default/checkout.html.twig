@@ -221,7 +221,12 @@
                             <td><span>{{ item.code }}</span></td>
                             <td><span>{{ item.quantity }}</span></td>
                             <td><span data-prefix>$</span><span>{{ item.price }}</span></td>
-                            <td><span>Remove</span></td>
+                            {#                            <td><span>Remove</span></td>#}
+                            <td>
+                                <span>
+                                    <a href="{{ path('checkout') }}?action=remove&code={{ item.code }}" class="btnRemoveAction">Remove Item</a>
+                                </span>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -257,27 +262,27 @@
             <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script type="text/javascript">
                 $(function () {
-                    {#$('.coupon').keyup(function () {
+                {#$('.coupon').keyup(function () {
 
-                    });#}
-                    var total = parseInt($('.total_val').text());
-                    var pure_total = parseInt($('.total_val').text());
-                    
-                    $('.coupon').on('input', function () {
-                        $.post("{{ path('validate_coupon') }}", {code: $(this).val()}, function (data) {
-                            if(data === 'valid'){
-                                $('.coupon_error').hide();
-                                $('.coupon_success').show();
-                                var coupon_total = pure_total + pure_total * 15/100;
-                                $('.total_val').text(coupon_total);
-                            }else{
-                                $('.coupon_success').hide();
-                                $('.coupon_error').show();
-                                $('.total_val').text(total);
-                            }
+                });#}
+                            var total = parseInt($('.total_val').text());
+                            var pure_total = parseInt($('.total_val').text());
+
+                            $('.coupon').on('input', function () {
+                                $.post("{{ path('validate_coupon') }}", {code: $(this).val()}, function (data) {
+                                    if (data === 'valid') {
+                                        $('.coupon_error').hide();
+                                        $('.coupon_success').show();
+                                        var coupon_total = pure_total + pure_total * 15 / 100;
+                                        $('.total_val').text(coupon_total);
+                                    } else {
+                                        $('.coupon_success').hide();
+                                        $('.coupon_error').show();
+                                        $('.total_val').text(total);
+                                    }
+                                });
+                            });
                         });
-                    });
-                });
             </script>
         {% endblock %}
     </body>

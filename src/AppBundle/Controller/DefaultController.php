@@ -16,6 +16,7 @@ class DefaultController extends Controller {
 
     /**
      * @Route("/", name="homepage")
+     * @Cache(expires="+3000 seconds")
      */
     public function indexAction(Request $request) {
         $session = $request->getSession();
@@ -120,6 +121,21 @@ class DefaultController extends Controller {
         $child_total = 0;
         $all_categoty_discount = 0;
         $total = 0;
+        
+        if ($request->query->has('action')) {
+            switch ($request->query->get('action')) {
+                case "remove":
+                    if (!empty($session->get('cart_item'))) {
+                        $itm_arr = $session->get('cart_item');
+                        unset($itm_arr[$request->query->get('code')]);
+                        $session->set('cart_item', $itm_arr);
+                        if (empty($session->get('cart_item'))) {
+                            $session->remove('cart_item');
+                        }
+                    }
+                    break;
+            }
+        }
 
         $categories = $this->getDoctrine()
                 ->getRepository('AppBundle:Category')
