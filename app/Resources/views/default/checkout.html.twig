@@ -230,7 +230,7 @@
             <table class="balance">
                 <tr>
                     <th><span contenteditable>Total</span></th>
-                    <td><span data-prefix>$</span><span>{{ total|number_format(2, '.', ',') }}</span></td>
+                    <td><span data-prefix>$</span><span class="pure_total">{{ total|number_format(2, '.', ',') }}</span></td>
                 </tr>
                 <tr>
                     <th><span contenteditable>Children discount</span></th>
@@ -261,14 +261,15 @@
 
                     });#}
                     var total = parseInt($('.total_val').text());
+                    var pure_total = parseInt($('.total_val').text());
                     
                     $('.coupon').on('input', function () {
                         $.post("{{ path('validate_coupon') }}", {code: $(this).val()}, function (data) {
                             if(data === 'valid'){
                                 $('.coupon_error').hide();
                                 $('.coupon_success').show();
-                                var new_total = total + total * 15/100;
-                                $('.total_val').text(new_total);
+                                var coupon_total = pure_total + pure_total * 15/100;
+                                $('.total_val').text(coupon_total);
                             }else{
                                 $('.coupon_success').hide();
                                 $('.coupon_error').show();
