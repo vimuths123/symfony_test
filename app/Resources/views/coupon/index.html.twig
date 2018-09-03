@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Coupons list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coupon in coupons %}
+            <tr>
+                <td><a href="{{ path('coupon_show', { 'id': coupon.id }) }}">{{ coupon.id }}</a></td>
+                <td>{{ coupon.code }}</td>
+                <td>{{ coupon.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('coupon_show', { 'id': coupon.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('coupon_edit', { 'id': coupon.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('coupon_new') }}">Create a new coupon</a>
+        </li>
+    </ul>
+{% endblock %}
