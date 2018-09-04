@@ -11,7 +11,7 @@ security:
                         password: ryanpass
                         roles: 'ROLE_USER'
                     admin:
-                        password: kitten
+                        password: admin
                         roles: 'ROLE_ADMIN'   
         
     encoders:
