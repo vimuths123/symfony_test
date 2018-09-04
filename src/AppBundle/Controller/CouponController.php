@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Coupon controller.
  *
- * @Route("coupon")
+ * @Route("admin/coupon")
  */
 class CouponController extends Controller {
 

@@ -5,16 +5,41 @@ security:
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    ryan:
+                        password: ryanpass
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: kitten
+                        roles: 'ROLE_ADMIN'   
+        
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext    
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+         
+        
+#        secured_area:
+#            # ...
+#            anonymous: ~
+#            http_basic: ~  
+             
 
         main:
             anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            pattern:    ^/
+            http_basic: ~   
+            logout:
+                path:   /logout
+                target: /   
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -22,3 +47,7 @@ security:
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }

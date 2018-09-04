@@ -15,6 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller {
 
     /**
+     * @Route("/admin")
+     */
+    public function adminAction() {
+        return new Response('<html><body>Admin page!</body></html>');
+    }
+
+    /**
      * @Route("/", name="homepage")
      * @Cache(expires="+3000 seconds")
      */
@@ -121,7 +128,7 @@ class DefaultController extends Controller {
         $child_total = 0;
         $all_categoty_discount = 0;
         $total = 0;
-        
+
         if ($request->query->has('action')) {
             switch ($request->query->get('action')) {
                 case "remove":
