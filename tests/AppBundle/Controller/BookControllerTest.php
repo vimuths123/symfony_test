@@ -11,7 +11,7 @@ class BookControllerTest extends WebTestCase {
         
         $client = static::createClient(array(), array(
                     'PHP_AUTH_USER' => 'admin',
-                    'PHP_AUTH_PW' => 'kitten',
+                    'PHP_AUTH_PW' => 'admin',
         ));
 
         $crawler = $client->request('GET', '/admin/book/');
@@ -22,7 +22,7 @@ class BookControllerTest extends WebTestCase {
     public function testNewBook() {
         $client = static::createClient(array(), array(
                     'PHP_AUTH_USER' => 'admin',
-                    'PHP_AUTH_PW' => 'kitten',
+                    'PHP_AUTH_PW' => 'admin',
         ));
 
         $crawler = $client->request('GET', '/admin/book/new');
