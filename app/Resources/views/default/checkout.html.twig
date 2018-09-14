@@ -273,7 +273,7 @@
                                     if (data === 'valid') {
                                         $('.coupon_error').hide();
                                         $('.coupon_success').show();
-                                        var coupon_total = pure_total + pure_total * 15 / 100;
+                                        var coupon_total = pure_total - pure_total * 15 / 100;
                                         $('.total_val').text(coupon_total);
                                     } else {
                                         $('.coupon_success').hide();
